@@ -1,0 +1,17 @@
+# vscode
+.vscode/
+
+# bear
+compile_commands.json
+.cache/
+
+# Compilation
+*.a
+*.o
+
+# Project
+42sh
+
+# Unit tests
+*.gc*
+unit_tests
