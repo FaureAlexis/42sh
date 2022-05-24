@@ -21,11 +21,21 @@ SRC_PARSING 			=	parsing/parse_semicolons.c
 
 SRC_TOOLS				=	tools/string/clean_string.c
 
+SRC_BINARY				=	binary/check_binary.c			\
+							binary/my/alias.c 				\
+							binary/my/cd.c 					\
+							binary/my/env.c 				\
+							binary/my/history.c 			\
+							binary/my/setenv.c 				\
+							binary/my/unsetenv.c 			\
+							binary/my/theme.c				\
+
 SRC						= 	$(addprefix src/, $(SRC_42SH))		\
 							$(addprefix src/, $(SRC_PROMPT))	\
-							$(addprefix src/, $(SRC_ERROR))	\
+							$(addprefix src/, $(SRC_ERROR))		\
 							$(addprefix src/, $(SRC_PARSING))	\
-							$(addprefix src/, $(SRC_TOOLS))	\
+							$(addprefix src/, $(SRC_TOOLS))		\
+							$(addprefix src/, $(SRC_BINARY))	\
 
 MAIN 					=	main.c
 
