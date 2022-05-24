@@ -11,10 +11,21 @@ endif
 
 SRC_42SH				=	shell.c
 
+SRC_PROMPT				=	prompt/display_prompt.c		\
+							prompt/zsh.c				\
+							prompt/get_input.c
+
 SRC_ERROR				=	error_handling/check_env.c
 
-SRC						= 	$(SRC_42SH)	\
-							$(SRC_ERROR) \
+SRC_PARSING 			=	parsing/parse_semicolons.c
+
+SRC_TOOLS				=	tools/string/clean_string.c
+
+SRC						= 	$(SRC_42SH)		\
+							$(SRC_PROMPT) 	\
+							$(SRC_ERROR)	\
+							$(SRC_PARSING)	\
+							$(SRC_TOOLS)	\
 							main.c
 
 OBJ						=	$(addprefix src/, $(SRC:.c=.o))

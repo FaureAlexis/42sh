@@ -14,6 +14,14 @@
 #define SUCCESS 0
 #define FAILURE 84
 
+/* Prompt themes */
+enum theme_e { OH_MY_ZSH, TCSH, EPITECH };
+
+/* Main struct */
+typedef struct shell_s {
+    enum theme_e prompt_theme;
+} shell_t;
+
 /* Shell loop */
 
 int shell(char **env);
@@ -22,4 +30,13 @@ int shell(char **env);
 
 int check_env(char **env);
 
+/* Prompt management */
+
+void display_zsh(char *pwd);
+void display_prompt(shell_t *shell);
+
+/* Command input parsing */
+char **get_commands(shell_t *shell);
+char **parse_semicolons(char *cmd);
+char *clean_string(char *str);
 #endif /* !SH_H */
