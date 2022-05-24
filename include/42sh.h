@@ -39,6 +39,8 @@ void display_prompt(shell_t *shell);
 char **get_commands(shell_t *shell);
 char **parse_semicolons(char *cmd);
 char *clean_string(char *str);
+char **parse_args(char *command);
+char *parse_binary(char *command);
 
 /* My commands */
 

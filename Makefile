@@ -17,11 +17,12 @@ SRC_PROMPT				=	prompt/display_prompt.c		\
 
 SRC_ERROR				=	error_handling/check_env.c
 
-SRC_PARSING 			=	parsing/parse_semicolons.c
+SRC_PARSING 			=	parsing/parse_semicolons.c		\
+							parsing/parse_command.c			\
 
 SRC_TOOLS				=	tools/string/clean_string.c
 
-SRC_BUILTINS			=	builtins/check_builtins.c			\
+SRC_BUILTINS			=	builtins/check_binary.c			\
 							builtins/my/alias.c 				\
 							builtins/my/cd.c 					\
 							builtins/my/env.c 				\

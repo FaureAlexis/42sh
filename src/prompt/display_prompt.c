@@ -12,7 +12,7 @@ static char *get_pwd(void)
     size_t size = 2048;
     char *pwd = NULL;
 
-    pwd = malloc(size);
+    pwd = malloc(size + 1);
     pwd = getcwd(pwd, size);
     if (!pwd)
         return NULL;

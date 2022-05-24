@@ -32,7 +32,7 @@ static char *parse_git_branch(void)
     struct stat sa = {0};
     if (stat(".git/HEAD", &sa) != -1) {
         fd = open(".git/HEAD", O_RDONLY);
-        buffer = malloc(sa.st_size);
+        buffer = malloc(sa.st_size + 1);
         read(fd, buffer, sa.st_size);
         token = strtok(buffer, "/");
         while (token != NULL) {
