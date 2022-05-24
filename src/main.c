@@ -9,7 +9,7 @@
 
 int main(int ac, const char *av[], char **env)
 {
-    if (ac != 1 || !av || check_env(env) == FAILURE)
+    if (ac != 1 || !av || !env)
         return FAILURE;
     return shell(env);
 }

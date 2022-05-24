@@ -21,14 +21,20 @@ SRC_PARSING 			=	parsing/parse_semicolons.c
 
 SRC_TOOLS				=	tools/string/clean_string.c
 
-SRC						= 	$(SRC_42SH)		\
-							$(SRC_PROMPT) 	\
-							$(SRC_ERROR)	\
-							$(SRC_PARSING)	\
-							$(SRC_TOOLS)	\
-							main.c
+SRC						= 	$(addprefix src/, $(SRC_42SH))		\
+							$(addprefix src/, $(SRC_PROMPT))	\
+							$(addprefix src/, $(SRC_ERROR))	\
+							$(addprefix src/, $(SRC_PARSING))	\
+							$(addprefix src/, $(SRC_TOOLS))	\
 
-OBJ						=	$(addprefix src/, $(SRC:.c=.o))
+MAIN 					=	main.c
+
+OBJ						=	$(SRC:.c=.o)	\
+							$(addprefix src/, $(MAIN:.c=.o))
+
+TESTS					=	tests/test_shell.c
+
+OBJ_TESTS				=	$(SRC:.c=.o)
 
 NAME					=	42sh
 
@@ -49,10 +55,14 @@ $(NAME):	PREBUILD $(OBJ)
 clean:
 	@echo -e "\e[95mCleaning sources : \e[34m$(NAME)\e[0m"
 	@rm -f $(OBJ)
+	@rm -f unit*
 
 fclean:	clean
 	@rm -f $(NAME)
 
 re:	fclean all
 
-.PHONY	=	all re fclean clean
+tests_run:  fclean $(OBJ_TESTS)
+	$(CC) -o uni $(OBJ_TESTS) $(TESTS) $(CPPFLAGS) -lcriterion --coverage
+
+.PHONY	=	all re fclean clean tests_run

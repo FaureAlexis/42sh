@@ -18,6 +18,7 @@ static char *parse_dir(char *pwd)
         dir = token;
         token = strtok(NULL, "/");
     }
+    dir[strlen(dir)] = '\0';
     free(pwd);
     return dir;
 }
@@ -41,6 +42,7 @@ static char *parse_git_branch(void)
         branch[strlen(branch) - 1] = '\0';
         free(buffer);
         close(fd);
+        return branch;
     }
     return NULL;
 }

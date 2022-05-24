@@ -10,12 +10,17 @@
 char **parse_semicolons(char *cmd)
 {
     const char *sep = ";";
-    char **list = malloc(sizeof(char *) * strlen(cmd));
+    char **list = NULL;
+    char *token = NULL;
+
+    if (!cmd)
+        return NULL;
+    list = malloc(sizeof(char *) * strlen(cmd));
     if (!list) {
         list[0] = cmd;
         return list;
     }
-    char *token = strtok(cmd, sep);
+    token = strtok(cmd, sep);
     for (int idx = 0; token; idx += 1, token = strtok(NULL, sep))
         list[idx] = clean_string(token);
     return list;

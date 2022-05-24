@@ -23,9 +23,11 @@ char *get_input(shell_t *shell)
 char **get_commands(shell_t *shell)
 {
     char *input = NULL;
+    char *cmd = NULL;
+
     input = get_input(shell);
     if (!input)
         return NULL;
-    input = clean_string(input);
-    return parse_semicolons(input);
+    cmd = clean_string(input);
+    return parse_semicolons(cmd);
 }

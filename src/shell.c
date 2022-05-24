@@ -24,7 +24,7 @@ static int loop(char **env, shell_t *shell)
 
 int shell(char **env)
 {
-    if (!env)
+    if (!env || check_env(env) == FAILURE)
         return FAILURE;
     shell_t *shell = malloc(sizeof(shell_t));
     if (!shell)
