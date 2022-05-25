@@ -11,32 +11,35 @@ endif
 
 SRC_42SH				=	shell.c
 
-SRC_PROMPT				=	prompt/display_prompt.c		\
-							prompt/zsh.c				\
-							prompt/get_input.c
+SRC_PROMPT				=	display_prompt.c		\
+							zsh.c				\
+							get_input.c
 
-SRC_ERROR				=	error_handling/check_env.c
+SRC_ERROR				=	check_env.c
 
-SRC_PARSING 			=	parsing/parse_semicolons.c		\
-							parsing/parse_command.c			\
+SRC_PARSING 			=	parse_semicolons.c		\
+							parse_command.c			\
 
-SRC_TOOLS				=	tools/string/clean_string.c
+SRC_TOOLS				=	string/clean_string.c
 
-SRC_BUILTINS			=	builtins/check_binary.c			\
-							builtins/my/alias.c 				\
-							builtins/my/cd.c 					\
-							builtins/my/env.c 				\
-							builtins/my/history.c 			\
-							builtins/my/setenv.c 				\
-							builtins/my/unsetenv.c 			\
-							builtins/my/theme.c				\
+SRC_BUILTINS			=	check_binary.c			\
+							my/alias.c 				\
+							my/cd.c 					\
+							my/env.c 				\
+							my/history.c 			\
+							my/setenv.c 				\
+							my/unsetenv.c 			\
+							my/theme.c				\
 
-SRC						= 	$(addprefix src/, $(SRC_42SH))		\
-							$(addprefix src/, $(SRC_PROMPT))	\
-							$(addprefix src/, $(SRC_ERROR))		\
-							$(addprefix src/, $(SRC_PARSING))	\
-							$(addprefix src/, $(SRC_TOOLS))		\
-							$(addprefix src/, $(SRC_BUILTINS))	\
+SRC_FREE 				=	free_shell.c 					\
+
+SRC						= 	$(addprefix src/, $(SRC_42SH))						\
+							$(addprefix src/prompt/, $(SRC_PROMPT))				\
+							$(addprefix src/error_handling/, $(SRC_ERROR))		\
+							$(addprefix src/parsing/, $(SRC_PARSING))			\
+							$(addprefix src/tools/, $(SRC_TOOLS))				\
+							$(addprefix src/builtins/, $(SRC_BUILTINS))			\
+							$(addprefix src/free/, $(SRC_FREE)) 				\
 
 MAIN 					=	main.c
 
