@@ -14,21 +14,26 @@ static int loop(char **env, shell_t *shell)
         return FAILURE;
     while (1) {
         cmd = get_commands(shell);
-        if (cmd == NULL)
+        if (cmd == NULL) {
+            printf("exit\n");
             return SUCCESS;
-        for (int i = 0; cmd[i]; i += 1)
-            printf("%s\n", cmd[i]);
+        }
+        for (int i = 0; cmd[i]; i += 1) {}
     }
+
     return SUCCESS;
 }
 
 int shell(char **env)
 {
+    int code = FAILURE;
     if (!env || check_env(env) == FAILURE)
         return FAILURE;
     shell_t *shell = malloc(sizeof(shell_t));
     if (!shell)
         return FAILURE;
     shell->prompt_theme = TCSH;
-    return loop(env, shell);
+    code = loop(env, shell);
+    free_shell(shell);
+    return code;
 }

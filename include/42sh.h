@@ -51,4 +51,7 @@ int my_env(char **args, shell_t *shell);
 int my_setenv(char **args, shell_t *shell);
 int my_unsetenv(char **args, shell_t *shell);
 int my_theme(char **args, shell_t *shell);
+
+/* Free memory */
+void free_shell(shell_t *shell);
 #endif /* !SH_H */
