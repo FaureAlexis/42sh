@@ -42,6 +42,9 @@ char *clean_string(char *str);
 char **parse_args(char *command);
 char *parse_binary(char *command);
 
+/* Command execution */
+void exec_cmd(char *cmd, shell_t *shell);
+
 /* My commands */
 
 int my_alias(char **args, shell_t *shell);

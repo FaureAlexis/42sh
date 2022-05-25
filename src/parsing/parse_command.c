@@ -14,8 +14,10 @@ char *parse_binary(char *command)
     if (!command)
         return NULL;
     binary = malloc(strlen(command) + 1);
-    for (int idx = 0; command[idx] != '\0' || command[idx] != ' '; idx += 1) {
-        binary[idx] = command[idx];
+    for (int idx = 0; command[idx] != '\0'; idx += 1) {
+        if (command[idx] == 32)
+            break;
+        binary[len] = command[idx];
         len += 1;
     }
     binary[len] = 0;
@@ -29,7 +31,9 @@ char **parse_args(char *command)
     char *token = NULL;
     if (!command)
         return NULL;
-    args = malloc(sizeof(char *) * strlen(command));
+    args = malloc(sizeof(char *) * strlen(command) + 1);
+    if (!args)
+        return NULL;
     token = strtok(command, " ");
     token = strtok(NULL, " ");
     while (token) {
@@ -38,5 +42,5 @@ char **parse_args(char *command)
         len += 1;
     }
     args[len] = NULL;
-    return NULL;
+    return args;
 }

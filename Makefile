@@ -33,6 +33,8 @@ SRC_BUILTINS			=	check_binary.c			\
 
 SRC_FREE 				=	free_shell.c 					\
 
+SRC_EXEC 				=	execute.c					\
+
 SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/prompt/, $(SRC_PROMPT))				\
 							$(addprefix src/error_handling/, $(SRC_ERROR))		\
@@ -40,6 +42,7 @@ SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/tools/, $(SRC_TOOLS))				\
 							$(addprefix src/builtins/, $(SRC_BUILTINS))			\
 							$(addprefix src/free/, $(SRC_FREE)) 				\
+							$(addprefix src/exec/, $(SRC_EXEC)) 				\
 
 MAIN 					=	main.c
 
