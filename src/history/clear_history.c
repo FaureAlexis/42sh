@@ -9,12 +9,14 @@
 
 void clear_history(shell_t *shell)
 {
+    int i = 0;
     if (!shell || !shell->history)
         return;
     his_element_t *node = shell->history->first;
-    while (node) {
+    while (i < shell->history->size) {
         if (node->prev)
             free(node->prev);
+        i += 1;
         node = node->next;
     }
     free(node);
