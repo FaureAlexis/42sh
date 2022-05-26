@@ -9,9 +9,7 @@
 
 void exec_cmd(char *command, shell_t *shell)
 {
-    cmd->binary = parse_binary(command);
-    cmd->args = parse_args(command);
-    if (!cmd->binary)
+    if (!shell || !command)
         return;
 }
 
