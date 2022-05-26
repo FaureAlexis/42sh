@@ -7,14 +7,25 @@
 
 #include "42sh.h"
 
-void exec_cmd(char *cmd, shell_t *shell)
+void exec_cmd(char *command, shell_t *shell)
 {
-    char *binary = NULL;
-    char **args = NULL;
-    if (!cmd || !shell)
+    cmd->binary = parse_binary(command);
+    cmd->args = parse_args(command);
+    if (!cmd->binary)
         return;
-    binary = parse_binary(cmd);
-    args = parse_args(cmd);
-    if (!binary)
+}
+
+void check_command(char *command)
+{
+    cmd_t *cmd = NULL;
+    cmd = malloc(sizeof(cmd_t));
+    cmd->binary = NULL;
+    cmd->args = NULL;
+    if (!cmd || !command)
         return;
+    if (!is_operator(command)) {
+        cmd->operator= NOTHING;
+    } else {
+        // get index & op
+    }
 }

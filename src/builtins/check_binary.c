@@ -5,7 +5,6 @@
 ** check if command is a binary
 */
 
-#include <stdbool.h>
 #include "42sh.h"
 
 bool is_a_binary(char *binary)

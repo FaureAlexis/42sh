@@ -34,6 +34,7 @@ SRC_BUILTINS			=	check_binary.c			\
 SRC_FREE 				=	free_shell.c 					\
 
 SRC_EXEC 				=	execute.c					\
+							analyse/analyse.c 			\
 
 SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/prompt/, $(SRC_PROMPT))				\

@@ -7,6 +7,7 @@
 
 #ifndef SH_H
 #define SH_H
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,6 +22,17 @@ enum theme_e { OH_MY_ZSH, TCSH, EPITECH };
 typedef struct shell_s {
     enum theme_e prompt_theme;
 } shell_t;
+
+/* Command struct */
+
+enum cmd_e { NOTHING, PIPE, OUTPUT, INPUT };
+
+typedef struct cmd_s {
+    char *binary;
+    char **args;
+    enum cmd_e operator;
+    int index;
+} cmd_t;
 
 /* Shell loop */
 
@@ -42,6 +54,8 @@ char *clean_string(char *str);
 char **parse_args(char *command);
 char *parse_binary(char *command);
 
+/* Command analysis*/
+bool is_operator(char *command);
 /* Command execution */
 void exec_cmd(char *cmd, shell_t *shell);
 
