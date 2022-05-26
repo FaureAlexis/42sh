@@ -9,7 +9,14 @@
 
 int my_setenv(char **args, shell_t *shell)
 {
-    if (!args || !shell)
+    char *name = NULL;
+    char *value = NULL;
+    if (!args || !shell || !shell->env || !args[0])
         return FAILURE;
-    return SUCCESS;
+    name = args[0];
+    if (!args[1])
+        value = "";
+    else
+        value = args[1];
+    return add_node(shell, name, value);
 }
