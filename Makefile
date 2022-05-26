@@ -37,6 +37,7 @@ SRC_EXEC 				=	execute.c					\
 							analyse/analyse.c 			\
 
 SRC_ENV					=	create_env.c				\
+							find_env.c 					\
 
 SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/prompt/, $(SRC_PROMPT))				\

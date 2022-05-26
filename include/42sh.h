@@ -64,6 +64,8 @@ int check_env(char **env);
 
 int create_env(shell_t *shell, char **env);
 int add_node(shell_t *shell, const char *name, const char *value);
+int update_env_value(shell_t *shell, char *name, char *value);
+char *get_env_value(shell_t *shell, char *name);
 
 /* Prompt management */
 
