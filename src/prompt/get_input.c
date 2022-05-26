@@ -29,5 +29,6 @@ char **get_commands(shell_t *shell)
     if (!input)
         return NULL;
     cmd = clean_string(input);
+    add_command_to_history(shell, clean_string(input));
     return parse_semicolons(cmd);
 }

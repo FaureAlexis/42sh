@@ -39,6 +39,10 @@ SRC_EXEC 				=	execute.c					\
 SRC_ENV					=	create_env.c				\
 							find_env.c 					\
 
+SRC_HISTORY				= 	add_history.c 				\
+							clear_history.c				\
+							init_history.c
+
 SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/prompt/, $(SRC_PROMPT))				\
 							$(addprefix src/error_handling/, $(SRC_ERROR))		\
@@ -48,6 +52,7 @@ SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/free/, $(SRC_FREE)) 				\
 							$(addprefix src/exec/, $(SRC_EXEC)) 				\
 							$(addprefix src/environment/, $(SRC_ENV))			\
+							$(addprefix src/history/, $(SRC_HISTORY))			\
 
 MAIN 					=	main.c
 

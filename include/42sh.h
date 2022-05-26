@@ -33,12 +33,28 @@ typedef struct envlist_s {
     int size;
 } list_t;
 
+/* history struct */
+
+typedef struct history_element_s {
+    int block;
+    char *command;
+    struct history_element_s *next;
+    struct history_element_s *prev;
+} his_element_t;
+
+typedef struct history_list_s {
+    his_element_t *first;
+    his_element_t *last;
+    int size;
+} history_t;
+
 /* Main struct */
 
 typedef struct shell_s {
     enum theme_e prompt_theme;
     char **path;
     list_t *env;
+    history_t *history;
 } shell_t;
 
 /* Command struct */
@@ -66,6 +82,12 @@ int create_env(shell_t *shell, char **env);
 int add_node(shell_t *shell, const char *name, const char *value);
 int update_env_value(shell_t *shell, char *name, char *value);
 char *get_env_value(shell_t *shell, char *name);
+
+/* History management */
+
+void clear_history(shell_t *shell);
+void add_command_to_history(shell_t *shell, char *command);
+int init_history(shell_t *shell);
 
 /* Prompt management */
 

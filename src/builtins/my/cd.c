@@ -52,7 +52,7 @@ int my_cd(char **args, shell_t *shell)
         printf("cd: Too many arguments.\n");
         return 0;
     }
-    err = cd(args[0]);
+    err = change_directory(shell, args[0]);
     if (err != SUCCESS) {
         printf("%s: Not a directory.\n", args[0]);
     }
