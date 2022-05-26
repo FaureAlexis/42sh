@@ -17,7 +17,16 @@
 /* Prompt themes */
 enum theme_e { OH_MY_ZSH, TCSH, EPITECH };
 
+/* minishell1 */
+
+typedef struct env_s {
+    char *name;
+    char *block;
+    struct env_s *next;
+}env_t;
+
 /* Main struct */
+
 typedef struct shell_s {
     enum theme_e prompt_theme;
 } shell_t;
@@ -43,7 +52,22 @@ char **parse_args(char *command);
 char *parse_binary(char *command);
 
 /* Command execution */
+
 void exec_cmd(char *cmd, shell_t *shell);
+
+/* Generique commands */
+
+env_t *find_nodenv(env_t *env, char *file);
+char **creat_array_from_str(char *cmd, const char *sep);
+int get_nb_words_comp(char const *str, char pos);
+int comp_sep(char c, char pos);
+
+/* Executable */
+
+int exec_cd(env_t *head, int exit, char *buff);
+int gets_setenv(env_t *head, int exit, char *buff);
+int gets_unsetenv(env_t *head, int exit, char *buff);
+int print_env(env_t *head, int exit, char *buff);
 
 /* My commands */
 

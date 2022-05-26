@@ -11,6 +11,7 @@ void exec_cmd(char *cmd, shell_t *shell)
 {
     char *binary = NULL;
     char **args = NULL;
+
     if (!cmd || !shell)
         return;
     binary = parse_binary(cmd);

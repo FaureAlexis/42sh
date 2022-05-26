@@ -35,6 +35,12 @@ SRC_FREE 				=	free_shell.c 					\
 
 SRC_EXEC 				=	execute.c					\
 
+SRC_COMMAND				= 	cd.c 					\
+							generic_fonction.c		\
+							env.c 					\
+							setenv.c 				\
+							unsetenv.c
+
 SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/prompt/, $(SRC_PROMPT))				\
 							$(addprefix src/error_handling/, $(SRC_ERROR))		\
@@ -43,13 +49,14 @@ SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/builtins/, $(SRC_BUILTINS))			\
 							$(addprefix src/free/, $(SRC_FREE)) 				\
 							$(addprefix src/exec/, $(SRC_EXEC)) 				\
+							$(addprefix src/command/, $(SRC_COMMAND))	\
 
 MAIN 					=	main.c
 
 OBJ						=	$(SRC:.c=.o)	\
 							$(addprefix src/, $(MAIN:.c=.o))
 
-TESTS					=	tests/test_shell.c
+TESTS						=	tests/test_shell.c
 
 OBJ_TESTS				=	$(SRC:.c=.o)
 
