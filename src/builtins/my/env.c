@@ -9,7 +9,12 @@
 
 int my_env(char **args, shell_t *shell)
 {
-    if (!args || !shell)
+    if (!args || !shell || !shell->env)
         return FAILURE;
+    env_t *env = shell->env->first;
+    while (env) {
+        printf("%s=%s\n", env->name, env->value);
+        env = env->next;
+    }
     return SUCCESS;
 }

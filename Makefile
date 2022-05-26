@@ -36,11 +36,7 @@ SRC_FREE 				=	free_shell.c 					\
 SRC_EXEC 				=	execute.c					\
 							analyse/analyse.c 			\
 
-SRC_COMMAND				= 	cd.c 					\
-							generic_fonction.c		\
-							env.c 					\
-							setenv.c 				\
-							unsetenv.c
+SRC_ENV					=	create_env.c				\
 
 SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/prompt/, $(SRC_PROMPT))				\
@@ -50,7 +46,7 @@ SRC						= 	$(addprefix src/, $(SRC_42SH))						\
 							$(addprefix src/builtins/, $(SRC_BUILTINS))			\
 							$(addprefix src/free/, $(SRC_FREE)) 				\
 							$(addprefix src/exec/, $(SRC_EXEC)) 				\
-							$(addprefix src/command/, $(SRC_COMMAND))	\
+							$(addprefix src/environment/, $(SRC_ENV))			\
 
 MAIN 					=	main.c
 

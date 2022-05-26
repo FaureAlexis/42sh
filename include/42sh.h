@@ -18,18 +18,27 @@
 /* Prompt themes */
 enum theme_e { OH_MY_ZSH, TCSH, EPITECH };
 
-/* minishell1 */
+/* env struct */
 
 typedef struct env_s {
     char *name;
-    char *block;
+    char *value;
     struct env_s *next;
-}env_t;
+    struct env_s *prev;
+} env_t;
+
+typedef struct envlist_s {
+    env_t *first;
+    env_t *last;
+    int size;
+} list_t;
 
 /* Main struct */
 
 typedef struct shell_s {
     enum theme_e prompt_theme;
+    char **path;
+    list_t *env;
 } shell_t;
 
 /* Command struct */
@@ -51,6 +60,10 @@ int shell(char **env);
 
 int check_env(char **env);
 
+/* Environment management */
+
+int create_env(shell_t *shell, char **env);
+
 /* Prompt management */
 
 void display_zsh(char *pwd);
@@ -64,24 +77,12 @@ char **parse_args(char *command);
 char *parse_binary(char *command);
 
 /* Command analysis*/
+
 bool is_operator(char *command);
+
 /* Command execution */
 
 void exec_cmd(char *cmd, shell_t *shell);
-
-/* Generique commands */
-
-env_t *find_nodenv(env_t *env, char *file);
-char **creat_array_from_str(char *cmd, const char *sep);
-int get_nb_words_comp(char const *str, char pos);
-int comp_sep(char c, char pos);
-
-/* Executable */
-
-int exec_cd(env_t *head, int exit, char *buff);
-int gets_setenv(env_t *head, int exit, char *buff);
-int gets_unsetenv(env_t *head, int exit, char *buff);
-int print_env(env_t *head, int exit, char *buff);
 
 /* My commands */
 
