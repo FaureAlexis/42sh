@@ -1,0 +1,39 @@
+name: 42shell Verifications
+on: [push]
+jobs:
+  compilation:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker:latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - run: make re
+
+  unit_tests:
+    needs: compilation
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker:latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - run: make tests_run
+
+  fetch_repo:
+    needs: 
+      - compilation
+      - unit_tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: pixta-dev/repository-mirroring-action@v1
+      with:
+        target_repo_url:
+          git@github.com:EpitechPromo2026/B-PSU-210-BDX-2-1-42sh-alexis.faure.git
+        ssh_private_key:
+          ${{ secrets.SSH_PRIVATE_KEY }}
