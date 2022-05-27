@@ -14,7 +14,7 @@ LIB_INSTALLED = no
 ifeq "$(shell echo '\#include <readline/readline.h>\nint main(){return 0;}' | $(CC) -x c -Wall -O -o /dev/null > /dev/null 2> /dev/null - && echo $$? )" "0"
 	LIB_INSTALLED = yes
 else
-	ifeq "$(shell dnf install libreadline6 libreadline6-dev && echo $$? )" "0"
+	ifeq "$(shell yum install readline-devel <<< y && echo $$? )" "0"
 		LIB_INSTALLED = yes
 	endif
 endif
@@ -79,7 +79,7 @@ OBJ_TESTS				=	$(SRC:.c=.o)
 
 NAME					=	42sh
 
-CPPFLAGS				=	-I ./include -g -Werror -Wall -Wextra -Wpedantic 
+CPPFLAGS				=	-I ./include -g -lreadline
 
 all:	$(NAME)
 
@@ -104,6 +104,7 @@ fclean:	clean
 re:	fclean all
 
 tests_run:  fclean $(OBJ_TESTS)
-	$(CC) -o uni $(OBJ_TESTS) $(TESTS) $(CPPFLAGS) -lcriterion --coverage
+	$(CC) -o unit_tests $(OBJ_TESTS) $(TESTS) $(CPPFLAGS) -lcriterion --coverage
+	./unit_tests
 
 .PHONY	=	all re fclean clean tests_run
