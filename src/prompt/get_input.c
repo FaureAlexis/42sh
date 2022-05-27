@@ -5,8 +5,6 @@
 ** get user input
 */
 
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "42sh.h"
 
 char *get_input(shell_t *shell)
