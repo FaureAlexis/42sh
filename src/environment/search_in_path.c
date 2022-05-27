@@ -11,23 +11,16 @@
 
 bool is_in_dir(char *dir_path, char *command)
 {
-    int is_good = 0;
     struct dirent *stream = NULL;
     DIR *op = NULL;
 
     if (!dir_path || !command)
         return false;
-    is_good = access(dir_path, R_OK);
-    if (is_good == -1) {
-        perror(dir_path);
-    }
     op = opendir(dir_path);
     if (op == NULL)
         return false;
     while ((stream = readdir(op)) != NULL) {
-        if (stream->d_type == DT_DIR)
-            return false;
-        if (strcmp(stream->d_name, command) == 0)
+        if (strcmp(stream->d_name, command) == 0 && stream->d_type != DT_DIR)
             return true;
     }
     return false;

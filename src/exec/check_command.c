@@ -32,5 +32,10 @@ int exec_cmd(char *command, shell_t *shell)
     cmd_t *cmd = check_command(command);
     if (!cmd)
         return FAILURE;
+    if (cmd->operator== NOTHING) {
+        cmd->binary = parse_binary(command);
+        cmd->args = parse_args(command);
+        execute(cmd, shell);
+    }
     return SUCCESS;
 }

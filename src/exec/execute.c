@@ -58,17 +58,17 @@ void handle_return(int status)
     printf("\n");
 }
 
-int execute(char *binary, char **args, shell_t *shell)
+int execute(cmd_t *cmd, shell_t *shell)
 {
     pid_t pid = fork();
-    char *name = malloc(sizeof(char) * sizeof(binary));
-    strcpy(name, binary);
-    if (is_a_binary(binary) == 0) {
-        binary = search_in_path(name, shell);
+    char *name = malloc(sizeof(char) * strlen(cmd->binary));
+    strcpy(name, cmd->binary);
+    if (is_a_binary(cmd->binary) == 0) {
+        cmd->binary = search_in_path(name, shell);
     }
     if (pid == 0) {
         pid = getpid();
-        int err = execve(binary, args, env_to_tab(shell));
+        int err = execve(cmd->binary, cmd->args, env_to_tab(shell));
         if (err != 0) {
             handle_error(name);
         }

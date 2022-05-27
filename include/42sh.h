@@ -111,6 +111,7 @@ int get_operator_and_index(cmd_t *cmd, char *command);
 /* Command execution */
 
 int exec_cmd(char *cmd, shell_t *shell);
+int execute(cmd_t *cmd, shell_t *shell);
 
 /* My commands */
 
