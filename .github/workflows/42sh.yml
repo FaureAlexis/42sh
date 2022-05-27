@@ -24,9 +24,6 @@ jobs:
     - run: make tests_run
 
   fetch_repo:
-    needs: 
-      - compilation
-      - unit_tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
