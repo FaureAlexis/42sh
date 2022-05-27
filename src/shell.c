@@ -22,7 +22,6 @@ static int loop(char **env, shell_t *shell)
             exec_cmd(cmd[i], shell);
         }
     }
-
     return SUCCESS;
 }
 
