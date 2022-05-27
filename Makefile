@@ -9,6 +9,17 @@ ifndef VERBOSE
 .SILENT:
 endif
 
+LIB_INSTALLED = no
+
+ifeq "$(shell echo '\#include <readline/readline.h>\nint main(){return 0;}' | $(CC) -x c -Wall -O -o /dev/null > /dev/null 2> /dev/null - && echo $$? )" "0"
+	LIB_INSTALLED = yes
+else
+	ifeq "$(shell dnf install libreadline6 libreadline6-dev && echo $$? )" "0"
+		LIB_INSTALLED = yes
+	endif
+endif
+
+
 SRC_42SH				=	shell.c
 
 SRC_PROMPT				=	display_prompt.c		\
@@ -79,7 +90,7 @@ PREBUILD:
 $(NAME):	PREBUILD $(OBJ)
 	@echo -e "\e[92mBuilding sources : \e[34m$(NAME)\e[5m . \e[0m\e[5m . \
 	\e[34m . \e[0m"
-	@$(CC) -o $(NAME) $(OBJ) $(CPPFLAGS)
+	@$(CC) -o $(NAME) $(OBJ) $(CPPFLAGS) -lreadline
 	@echo -e "\e[92m\e[1mBuild successfull !\e[0m"
 
 clean:
