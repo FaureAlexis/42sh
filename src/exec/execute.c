@@ -74,7 +74,6 @@ int execute(cmd_t *cmd, shell_t *shell)
     if (is_a_bin(cmd->binary) == 0) {
         cmd->binary = search_in_path(name, shell);
     }
-
     if (pid == 0) {
         pid = getpid();
         int err = execve(cmd->binary, cmd->args, env_to_tab(shell));
