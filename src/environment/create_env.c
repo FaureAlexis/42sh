@@ -9,6 +9,21 @@
 #include <string.h>
 #include "42sh.h"
 
+char **env_to_tab(shell_t *shell)
+{
+    env_t *node = NULL;
+    char **env = NULL;
+    if (!shell)
+        return NULL;
+    env = malloc(sizeof(char *) * shell->env->size);
+    node = shell->env->first;
+    for (int i = 0; node; i += 1) {
+        env[i] = malloc(strlen(node->name) + strlen(node->value) + 2);
+        node = node->next;
+    }
+    return env;
+}
+
 int add_node(shell_t *shell, const char *name, const char *value)
 {
     env_t *node = NULL;

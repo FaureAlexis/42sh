@@ -38,6 +38,7 @@ SRC_EXEC 				=	execute.c					\
 
 SRC_ENV					=	create_env.c				\
 							find_env.c 					\
+							get_path.c					\
 
 SRC_HISTORY				= 	add_history.c 				\
 							clear_history.c				\

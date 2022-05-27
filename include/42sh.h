@@ -53,6 +53,7 @@ typedef struct history_list_s {
 typedef struct shell_s {
     enum theme_e prompt_theme;
     char **path;
+
     list_t *env;
     history_t *history;
 } shell_t;
@@ -79,10 +80,12 @@ int check_env(char **env);
 /* Environment management */
 
 int create_env(shell_t *shell, char **env);
+char **env_to_tab(shell_t *shell);
 int add_node(shell_t *shell, const char *name, const char *value);
 int update_env_value(shell_t *shell, char *name, char *value);
 char *get_env_value(shell_t *shell, char *name);
-
+int save_path(shell_t *shell);
+char *search_in_path(char *binary_name, shell_t *shell);
 /* History management */
 
 void clear_history(shell_t *shell);
@@ -104,10 +107,10 @@ char *parse_binary(char *command);
 /* Command analysis*/
 
 bool is_operator(char *command);
-
+int get_operator_and_index(cmd_t *cmd, char *command);
 /* Command execution */
 
-void exec_cmd(char *cmd, shell_t *shell);
+int exec_cmd(char *cmd, shell_t *shell);
 
 /* My commands */
 

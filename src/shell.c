@@ -37,6 +37,8 @@ int shell(char **env)
     shell->prompt_theme = TCSH;
     if (create_env(shell, env) == FAILURE || init_history(shell) == FAILURE)
         return FAILURE;
+    if (save_path(shell) == FAILURE)
+        return FAILURE;
     code = loop(env, shell);
     free_shell(shell);
     return code;
