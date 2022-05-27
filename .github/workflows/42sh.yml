@@ -9,7 +9,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - run: yum install readline-devel
+    - run: yum install readline-devel <<< y
     - run: make re
 
   unit_tests:
