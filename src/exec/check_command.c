@@ -35,7 +35,11 @@ int exec_cmd(char *command, shell_t *shell)
     if (cmd->operator== NOTHING) {
         cmd->binary = parse_binary(command);
         cmd->args = parse_args(command);
-        execute(cmd, shell);
+        if (is_a_binary(cmd->binary)) {
+            call_binary(cmd->binary, cmd->args, shell);
+        } else {
+            execute(cmd, shell);
+        }
     }
     return SUCCESS;
 }
