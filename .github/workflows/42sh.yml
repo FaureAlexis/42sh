@@ -9,7 +9,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - run: dnf install libreadline6 libreadline6-dev
+    - run: dnf install readline
     - run: make re
 
   unit_tests:
