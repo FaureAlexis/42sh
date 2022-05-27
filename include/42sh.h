@@ -6,14 +6,14 @@
 */
 
 #ifndef SH_H
-#define SH_H
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#define SUCCESS 0
-#define FAILURE 84
+    #define SH_H
+    #include <stdbool.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <unistd.h>
+    #define SUCCESS 0
+    #define FAILURE 84
 
 /* Prompt themes */
 enum theme_e { OH_MY_ZSH, TCSH, EPITECH };
@@ -107,12 +107,14 @@ char *parse_binary(char *command);
 /* Command analysis*/
 
 bool is_operator(char *command);
+bool is_a_binary(char *binary);
 int get_operator_and_index(cmd_t *cmd, char *command);
+
 /* Command execution */
 
 int exec_cmd(char *cmd, shell_t *shell);
 int execute(cmd_t *cmd, shell_t *shell);
-
+int call_binary(char *binary, char **args, shell_t *shell);
 /* My commands */
 
 int my_alias(char **args, shell_t *shell);

@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 #include "42sh.h"
 
-static int is_a_binary(char *binary)
+static int is_a_bin(char *binary)
 {
     if (binary[0] == '.' && binary[1] == '/')
         return 1;
@@ -36,10 +36,18 @@ void handle_error(char *binary)
 int handle_signals(int sig)
 {
     switch (sig) {
-        case SIGSEGV: printf("Segmentation fault"); return 1;
-        case SIGFPE: printf("Floating exception"); return 1;
-        case SIGBUS: printf("Bus error"); return 1;
-        case SIGABRT: printf("Abort"); return 1;
+        case SIGSEGV: 
+            printf("Segmentation fault"); 
+            return 1;
+        case SIGFPE: 
+            printf("Floating exception");
+            return 1;
+        case SIGBUS: 
+            printf("Bus error");
+            return 1;
+        case SIGABRT: 
+            printf("Abort");
+            return 1;
         default: return 0;
     }
 }
@@ -63,9 +71,10 @@ int execute(cmd_t *cmd, shell_t *shell)
     pid_t pid = fork();
     char *name = malloc(sizeof(char) * strlen(cmd->binary));
     strcpy(name, cmd->binary);
-    if (is_a_binary(cmd->binary) == 0) {
+    if (is_a_bin(cmd->binary) == 0) {
         cmd->binary = search_in_path(name, shell);
     }
+
     if (pid == 0) {
         pid = getpid();
         int err = execve(cmd->binary, cmd->args, env_to_tab(shell));
