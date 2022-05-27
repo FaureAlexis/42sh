@@ -5,22 +5,20 @@
 ** get user input
 */
 
-#include "42sh.h"
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "42sh.h"
 
 char *get_input(shell_t *shell)
 {
-    //size_t size = 2048;
+    size_t size = 2048;
     char *input = NULL;
 
-    //display_prompt(shell);
-    //if (getline(&input, &size, stdin) == -1)
-     //   return NULL;
-    input = readline("> ");
+    display_prompt(shell);
+    if (getline(&input, &size, stdin) == -1)
+        return NULL;
     if (input[0] == '\n')
         return get_input(shell);
-    add_history(input);
     return input;
 }
 

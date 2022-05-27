@@ -44,7 +44,5 @@ char **parse_args(char *command)
     if (args[0] == NULL)
         args[0] = "";
     args[len + 1] = NULL;
-    for (int i = 0; args[i]; i++)
-        printf("arg[%d] : %s\n", i, args[i]);
     return args;
 }
