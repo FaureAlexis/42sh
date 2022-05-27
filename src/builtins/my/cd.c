@@ -6,55 +6,55 @@
 */
 
 #include "42sh.h"
+#include <errno.h>
 
-int handle_cd_error(shell_t *shell, int err, char *pwd, char *path)
+int handle_cd_error(shell_t *shell, int err, char *pwd)
 {
+    char *npwd = NULL;
     if (err == SUCCESS) {
         update_env_value(shell, "OLDPWD", pwd);
-        strcat(pwd, "/");
-        strcat(pwd, path);
-        return update_env_value(shell, "PWD", pwd);
+        npwd = getcwd(npwd, 0);
+        return update_env_value(shell, "PWD", npwd);
     } else {
         return FAILURE;
     }
 }
 
-int change_directory(shell_t *shell, char *path)
+int change_directory(shell_t *shell, char *path, char *pwd, char *oldpwd)
 {
     if (!path)
         return FAILURE;
     int err = SUCCESS;
-    char *pwd = NULL;
-    char *oldpwd = NULL;
-    char *home = NULL;
-    pwd = get_env_value(shell, "PWD");
-    oldpwd = get_env_value(shell, "OLDPWD");
-    home = get_env_value(shell, "HOME");
-    if (!pwd || !oldpwd || !home)
+    
+    if (!pwd || !oldpwd)
         return FAILURE;
-
-    if (strcmp(path, "-") == 0)
-        err = chdir(oldpwd);
-    else if (strcmp(path, "~") == 0)
-        err = chdir(home);
-    else
-        err = chdir(path);
-    return handle_cd_error(shell, err, pwd, path);
+    err = chdir(path);
+    err = handle_cd_error(shell, err, pwd);
+    if (err != SUCCESS) {
+        perror("cd: ");
+        printf("%s: Not a directory.\n", path);
+    }
+    return err;
 }
 
 int my_cd(char **args, shell_t *shell)
 {
+    char *path = NULL;
+
     if (!args || !shell || !args[0])
         return FAILURE;
-    int err = 0;
-
+    char *pwd = get_env_value(shell, "PWD");
+    char *oldpwd = get_env_value(shell, "OLDPWD");
+    char *home = get_env_value(shell, "HOME");
     if (args[0] != NULL && args[1] != NULL) {
         printf("cd: Too many arguments.\n");
-        return 0;
+        return FAILURE;
     }
-    err = change_directory(shell, args[0]);
-    if (err != SUCCESS) {
-        printf("%s: Not a directory.\n", args[0]);
-    }
-    return SUCCESS;
+    if (strcmp(args[0], "-") == 0)
+        path = oldpwd;
+    else if (strcmp(args[0], "~") == 0)
+        path = home;
+    else
+        path = args[0];
+    return(change_directory(shell, path, pwd, oldpwd));
 }
