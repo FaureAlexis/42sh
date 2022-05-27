@@ -57,7 +57,7 @@ void display_zsh(char *pwd)
     git_branch = parse_git_branch();
     printf("\x1b[1m\x1b[92m➜  \x1b[36m%s", current_dir);
     if (git_branch) {
-        printf("\x1b[34m git:(\x1b[91m%s\x1b[34m)\x1b[33m ✗ ", git_branch);
+        printf("\x1b[34m git:(\x1b[91m%s\x1b[34m)", git_branch);
     }
-    printf("\x1b[0m");
+    printf("\x1b[33m ✗ \x1b[0m");
 }
