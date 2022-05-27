@@ -88,7 +88,7 @@ int save_path(shell_t *shell);
 char *search_in_path(char *binary_name, shell_t *shell);
 /* History management */
 
-void clear_history(shell_t *shell);
+void clear_my_history(shell_t *shell);
 void add_command_to_history(shell_t *shell, char *command);
 int init_history(shell_t *shell);
 

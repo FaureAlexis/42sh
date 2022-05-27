@@ -7,7 +7,7 @@
 
 #include "42sh.h"
 
-void clear_history(shell_t *shell)
+void clear_my_history(shell_t *shell)
 {
     int i = 0;
     if (!shell || !shell->history)

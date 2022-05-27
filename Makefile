@@ -68,7 +68,7 @@ OBJ_TESTS				=	$(SRC:.c=.o)
 
 NAME					=	42sh
 
-CPPFLAGS				=	-I ./include -g -Werror -Wall -Wextra -Wpedantic
+CPPFLAGS				=	-I ./include -g -Werror -Wall -Wextra -Wpedantic 
 
 all:	$(NAME)
 
