@@ -7,6 +7,8 @@
 
 #include <errno.h>
 #include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "42sh.h"
 
 static int is_a_binary(char *binary)
