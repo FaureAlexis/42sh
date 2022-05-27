@@ -9,7 +9,7 @@
 #include <signal.h>
 #include "42sh.h"
 
-int is_a_binary(char *binary)
+static int is_a_binary(char *binary)
 {
     if (binary[0] == '.' && binary[1] == '/')
         return 1;

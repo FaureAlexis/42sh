@@ -34,11 +34,13 @@ SRC_BUILTINS			=	check_binary.c			\
 SRC_FREE 				=	free_shell.c 					\
 
 SRC_EXEC 				=	execute.c					\
+							check_command.c 			\
 							analyse/analyse.c 			\
 
 SRC_ENV					=	create_env.c				\
 							find_env.c 					\
 							get_path.c					\
+							search_in_path.c			\
 
 SRC_HISTORY				= 	add_history.c 				\
 							clear_history.c				\
