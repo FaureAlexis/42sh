@@ -6,7 +6,6 @@
 */
 
 #include "42sh.h"
-#include <errno.h>
 
 int handle_cd_error(shell_t *shell, int err, char *pwd)
 {
@@ -31,7 +30,6 @@ int change_directory(shell_t *shell, char *path, char *pwd, char *oldpwd)
     err = chdir(path);
     err = handle_cd_error(shell, err, pwd);
     if (err != SUCCESS) {
-        perror("cd: ");
         printf("%s: Not a directory.\n", path);
     }
     return err;
@@ -56,5 +54,5 @@ int my_cd(char **args, shell_t *shell)
         path = home;
     else
         path = args[0];
-    return(change_directory(shell, path, pwd, oldpwd));
+    return change_directory(shell, path, pwd, oldpwd);
 }
