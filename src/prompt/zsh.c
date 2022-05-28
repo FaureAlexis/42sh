@@ -19,7 +19,7 @@ static char *parse_dir(char *pwd)
         token = strtok(NULL, "/");
     }
     dir[strlen(dir)] = '\0';
-    free(pwd);
+    //free(pwd);
     return dir;
 }
 
@@ -32,8 +32,8 @@ static char *parse_git_branch(void)
     struct stat sa = {0};
     if (stat(".git/HEAD", &sa) != -1) {
         fd = open(".git/HEAD", O_RDONLY);
-        buffer = malloc(sa.st_size + 1);
-        read(fd, buffer, sa.st_size);
+        buffer = malloc(sa.st_size + 2);
+        read(fd, buffer, sa.st_size + 1);
         token = strtok(buffer, "/");
         while (token != NULL) {
             branch = token;
@@ -55,6 +55,8 @@ void display_zsh(char *pwd)
     char *current_dir = NULL;
     current_dir = parse_dir(pwd);
     git_branch = parse_git_branch();
+    if (!current_dir)
+        return;
     printf("\x1b[1m\x1b[92m➜  \x1b[36m%s", current_dir);
     if (git_branch) {
         printf("\x1b[34m git:(\x1b[91m%s\x1b[34m)", git_branch);
