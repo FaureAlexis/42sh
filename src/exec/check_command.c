@@ -16,7 +16,7 @@ cmd_t *check_command(char *command)
     if (!cmd || !command)
         return NULL;
     if (!is_operator(command)) {
-        cmd->operator= NOTHING;
+        cmd->operator = NOTHING;
         return cmd;
     } else {
         if (get_operator_and_index(cmd, command) != FAILURE)
@@ -25,28 +25,26 @@ cmd_t *check_command(char *command)
     return NULL;
 }
 
-
-
-int exec_cmd(char *command, shell_t *shell)
+int exec_cmd(char *command, shell_t *shell, char **env)
 {
     if (!shell || !command)
         return FAILURE;
     cmd_t *cmd = check_command(command);
     if (!cmd)
         return FAILURE;
-    if (cmd->operator== NOTHING) {
+    if (cmd->operator == NOTHING) {
         cmd->binary = parse_binary(command);
         cmd->args = parse_args(command);
         if (is_a_binary(cmd->binary)) {
             call_binary(cmd->binary, cmd->args, shell);
         } else {
-            execute(cmd, shell);
+            execute(cmd, shell, env);
         }
     } else {
         if (cmd->operator == PIPE)
-            my_pipe(command, cmd, shell);
+            my_pipe(command, cmd, shell, env);
         else
-            redirect(command, cmd, shell);
+            redirect(command, cmd, shell, env);
     }
     return SUCCESS;
 }

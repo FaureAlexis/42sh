@@ -33,11 +33,11 @@ char *search_in_path(char *binary_name, shell_t *shell)
         return NULL;
     for (int i = 0; shell->path[i]; i += 1) {
         if (is_in_dir(shell->path[i], binary_name)) {
-            tmp = malloc(strlen(binary_name) + 1);
+            tmp = malloc(strlen(binary_name) + 2);
             tmp = strcpy(tmp, shell->path[i]);
             tmp = strcat(tmp, "/");
+            tmp[strlen(tmp)] = 0;
             binary_name = strcat(tmp, binary_name);
-            free(tmp);
             return binary_name;
         }
     }

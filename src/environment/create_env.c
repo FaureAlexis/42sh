@@ -17,10 +17,15 @@ char **env_to_tab(shell_t *shell)
         return NULL;
     env = malloc(sizeof(char *) * shell->env->size);
     node = shell->env->first;
-    for (int i = 0; node; i += 1) {
-        env[i] = malloc(strlen(node->name) + strlen(node->value) + 2);
+    int len = 0;
+    for (int i = 0; node; i += 1, len += 1) {
+        env[i] = malloc(strlen(node->name) + strlen(node->value) + 5);
+        env[i] = strcpy(env[i], node->name);
+        strcat(env[i], "=");
+        strcat(env[i], node->value);
         node = node->next;
     }
+    env[len] = NULL;
     return env;
 }
 

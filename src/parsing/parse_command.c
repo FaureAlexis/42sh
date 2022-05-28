@@ -13,7 +13,7 @@ char *parse_binary(char *command)
     char *binary = NULL;
     if (!command)
         return NULL;
-    binary = malloc(strlen(command) + 1);
+    binary = malloc(strlen(command) + 2);
     for (int idx = 0; command[idx] != '\0'; idx += 1) {
         if (command[idx] == 32)
             break;
@@ -42,6 +42,6 @@ char **parse_args(char *command)
     }
     if (args[0] == NULL)
         args[0] = "";
-    args[len + 1] = NULL;
+    args[len] = NULL;
     return args;
 }

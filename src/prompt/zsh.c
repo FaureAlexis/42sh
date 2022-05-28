@@ -19,7 +19,6 @@ static char *parse_dir(char *pwd)
         token = strtok(NULL, "/");
     }
     dir[strlen(dir)] = '\0';
-    //free(pwd);
     return dir;
 }
 

@@ -117,11 +117,11 @@ int get_operator_and_index(cmd_t *cmd, char *command);
 /* Command execution */
 
 int execution_control(char **cmd, shell_t *shell);
-int exec_cmd(char *cmd, shell_t *shell);
-int execute(cmd_t *cmd, shell_t *shell);
+int exec_cmd(char *cmd, shell_t *shell, char **env);
+int execute(cmd_t *cmd, shell_t *shell, char **env);
 int call_binary(char *binary, char **args, shell_t *shell);
-int my_pipe(char *command, cmd_t *cmd, shell_t *shell);
-int redirect(char *command, cmd_t *cmd, shell_t *shell);
+int my_pipe(char *command, cmd_t *cmd, shell_t *shell, char **env);
+int redirect(char *command, cmd_t *cmd, shell_t *shell, char **env);
 
 /* My commands */
 

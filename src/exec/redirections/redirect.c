@@ -7,7 +7,7 @@
 
 #include "42sh.h"
 
-int redirect(char *command, cmd_t *cmd, shell_t *shell)
+int redirect(char *command, cmd_t *cmd, shell_t *shell, char **env)
 {
     return SUCCESS;
 }

@@ -24,7 +24,7 @@ int change_directory(shell_t *shell, char *path, char *pwd, char *oldpwd)
     if (!path)
         return FAILURE;
     int err = SUCCESS;
-    
+
     if (!pwd || !oldpwd)
         return FAILURE;
     err = chdir(path);

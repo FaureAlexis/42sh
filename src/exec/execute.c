@@ -26,6 +26,8 @@ void handle_error(char *binary)
         fprintf(stderr, ": Command not found.\n");
     } else if (errno == ENOEXEC) {
         fprintf(stderr, ": Exec format error. Wrong Architecture.\n");
+    } else if (errno == EFAULT) {
+        printf("erreur de merde");
     } else {
         fprintf(stderr, ": ");
         fprintf(stderr, "%s", strerror(errno));
@@ -36,16 +38,16 @@ void handle_error(char *binary)
 int handle_signals(int sig)
 {
     switch (sig) {
-        case SIGSEGV: 
-            printf("Segmentation fault"); 
+        case SIGSEGV:
+            printf("Segmentation fault");
             return 1;
-        case SIGFPE: 
+        case SIGFPE:
             printf("Floating exception");
             return 1;
-        case SIGBUS: 
+        case SIGBUS:
             printf("Bus error");
             return 1;
-        case SIGABRT: 
+        case SIGABRT:
             printf("Abort");
             return 1;
         default: return 0;
@@ -66,17 +68,21 @@ void handle_return(int status)
     printf("\n");
 }
 
-int execute(cmd_t *cmd, shell_t *shell)
+int execute(cmd_t *cmd, shell_t *shell, char **env)
 {
-    pid_t pid = fork();
-    char *name = malloc(sizeof(char) * strlen(cmd->binary));
+    char *name = malloc(sizeof(char) * strlen(cmd->binary) + 20);
     strcpy(name, cmd->binary);
     if (is_a_bin(cmd->binary) == 0) {
         cmd->binary = search_in_path(name, shell);
+        if (!cmd->binary) {
+            fprintf(stderr, "%s: Command not found.\n", name);
+            return FAILURE;
+        }
     }
+    pid_t pid = fork();
     if (pid == 0) {
         pid = getpid();
-        int err = execve(cmd->binary, cmd->args, env_to_tab(shell));
+        int err = execve(cmd->binary, cmd->args, env);
         if (err != 0) {
             handle_error(name);
         }
