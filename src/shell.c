@@ -18,9 +18,7 @@ static int loop(char **env, shell_t *shell)
             printf("exit\n");
             return SUCCESS;
         }
-        for (int i = 0; cmd[i] != NULL; i += 1) {
-            exec_cmd(cmd[i], shell);
-        }
+        execution_control(cmd, shell);
     }
     return SUCCESS;
 }

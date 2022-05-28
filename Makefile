@@ -34,6 +34,7 @@ SRC_BUILTINS			=	check_binary.c			\
 SRC_FREE 				=	free_shell.c 					\
 
 SRC_EXEC 				=	execute.c					\
+							exec_control.c 				\
 							check_command.c 			\
 							analyse/analyse.c 			\
 

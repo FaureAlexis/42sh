@@ -35,7 +35,6 @@ char **parse_args(char *command)
     if (!args)
         return NULL;
     token = strtok(command, " ");
-    token = strtok(NULL, " ");
     while (token) {
         args[len] = token;
         token = strtok(NULL, " ");
