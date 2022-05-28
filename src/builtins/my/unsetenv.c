@@ -23,11 +23,11 @@ int delete_env(shell_t *shell, env_t *env)
 
 int my_unsetenv(char **args, shell_t *shell)
 {
-    if (!args || !shell || !shell->env || !args[0])
+    if (!args || !shell || !shell->env || !args[1])
         return FAILURE;
     env_t *env = shell->env->first;
     while (env) {
-        if (strcmp(env->name, args[0]) == 0) {}
+        if (strcmp(env->name, args[1]) == 0) {}
         env = env->next;
     }
     return FAILURE;

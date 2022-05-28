@@ -39,20 +39,20 @@ int my_cd(char **args, shell_t *shell)
 {
     char *path = NULL;
 
-    if (!args || !shell || !args[0])
+    if (!args || !shell || !args[1])
         return FAILURE;
     char *pwd = get_env_value(shell, "PWD");
     char *oldpwd = get_env_value(shell, "OLDPWD");
     char *home = get_env_value(shell, "HOME");
-    if (args[0] != NULL && args[1] != NULL) {
+    if (args[1] != NULL && args[2] != NULL) {
         printf("cd: Too many arguments.\n");
         return FAILURE;
     }
-    if (strcmp(args[0], "-") == 0)
+    if (strcmp(args[1], "-") == 0)
         path = oldpwd;
-    else if (strcmp(args[0], "~") == 0)
+    else if (strcmp(args[1], "~") == 0)
         path = home;
     else
-        path = args[0];
+        path = args[1];
     return change_directory(shell, path, pwd, oldpwd);
 }
