@@ -25,6 +25,8 @@ cmd_t *check_command(char *command)
     return NULL;
 }
 
+
+
 int exec_cmd(char *command, shell_t *shell)
 {
     if (!shell || !command)
@@ -40,6 +42,11 @@ int exec_cmd(char *command, shell_t *shell)
         } else {
             execute(cmd, shell);
         }
+    } else {
+        if (cmd->operator == PIPE)
+            my_pipe(command, cmd, shell);
+        else
+            redirect(command, cmd, shell);
     }
     return SUCCESS;
 }

@@ -14,6 +14,8 @@
     #include <unistd.h>
     #define SUCCESS 0
     #define FAILURE 84
+    #define PIPE_WRITE  1
+    #define PIPE_READ   0
 
 /* Prompt themes */
 enum theme_e { OH_MY_ZSH, TCSH, EPITECH };
@@ -60,7 +62,7 @@ typedef struct shell_s {
 
 /* Command struct */
 
-enum cmd_e { NOTHING, PIPE, OUTPUT, INPUT };
+enum cmd_e { NOTHING, PIPE, OUTPUT, INPUT, ERR };
 
 typedef struct cmd_s {
     char *binary;
@@ -100,9 +102,11 @@ void display_prompt(shell_t *shell);
 /* Command input parsing */
 char **get_commands(shell_t *shell);
 char **parse_semicolons(char *cmd);
+char **parse_pipes(char *cmd);
 char *clean_string(char *str);
 char **parse_args(char *command);
 char *parse_binary(char *command);
+int my_arrlen(char **array);
 
 /* Command analysis*/
 
@@ -112,10 +116,13 @@ int get_operator_and_index(cmd_t *cmd, char *command);
 
 /* Command execution */
 
-void execution_control(char **cmd, shell_t *shell);
+int execution_control(char **cmd, shell_t *shell);
 int exec_cmd(char *cmd, shell_t *shell);
 int execute(cmd_t *cmd, shell_t *shell);
 int call_binary(char *binary, char **args, shell_t *shell);
+int my_pipe(char *command, cmd_t *cmd, shell_t *shell);
+int redirect(char *command, cmd_t *cmd, shell_t *shell);
+
 /* My commands */
 
 int my_alias(char **args, shell_t *shell);

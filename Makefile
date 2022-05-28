@@ -19,8 +19,10 @@ SRC_ERROR				=	check_env.c
 
 SRC_PARSING 			=	parse_semicolons.c		\
 							parse_command.c			\
+							parse_pipes.c
 
-SRC_TOOLS				=	string/clean_string.c
+SRC_TOOLS				=	string/clean_string.c	\
+							array_len.c
 
 SRC_BUILTINS			=	check_binary.c			\
 							my/alias.c 				\
@@ -37,6 +39,9 @@ SRC_EXEC 				=	execute.c					\
 							exec_control.c 				\
 							check_command.c 			\
 							analyse/analyse.c 			\
+							pipe.c						\
+							redirections/in.c 			\
+							redirections/redirect.c     \
 
 SRC_ENV					=	create_env.c				\
 							find_env.c 					\
