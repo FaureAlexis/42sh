@@ -53,7 +53,6 @@ int my_pipe(char *command, cmd_t *cmd, shell_t *shell, char **env)
     if (!pipe_commands)
         return FAILURE;
     len = my_arrlen(pipe_commands);
-    printf("Command nb : %d, pipe nb : %d\n", len, len - 1);
     for (int i = 0; i < len - 1; i += 1) {
         exec_pipe(shell, pipe_commands[i], pipe_commands[i + 1], env);
     }
