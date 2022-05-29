@@ -7,19 +7,22 @@
 
 #include "42sh.h"
 
-void clear_my_history(shell_t *shell)
+int clear_my_history(shell_t *shell)
 {
     int i = 0;
     if (!shell || !shell->history)
-        return;
+        return FAILURE;
+    his_element_t *tmp = NULL;
     his_element_t *node = shell->history->first;
     while (i < shell->history->size) {
-        if (node->prev)
-            free(node->prev);
-        i += 1;
+        if (!node)
+            break;
+        tmp = node;
         node = node->next;
+        free(tmp);
+        i += 1;
     }
-    free(node);
     shell->history->first = NULL;
     shell->history->last = NULL;
+    return SUCCESS;
 }

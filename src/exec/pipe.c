@@ -9,7 +9,7 @@
 #include <signal.h>
 #include "42sh.h"
 
-void exec_child(char *command, shell_t *shell, char **env)
+int exec_child(char *command, shell_t *shell, char **env)
 {
     cmd_t *cmd = malloc(sizeof(cmd_t));
     cmd->binary = parse_binary(command);
@@ -17,7 +17,7 @@ void exec_child(char *command, shell_t *shell, char **env)
     if (is_a_binary(cmd->binary)) {
         call_binary(cmd->binary, cmd->args, shell);
     } else {
-        execute(cmd, shell, env);
+        return execute(cmd, shell, env);
     }
 }
 
@@ -35,6 +35,7 @@ int exec_pipe(shell_t *shell, char *command1, char *command2, char **env)
         dup2(fd[PIPE_READ], 0);
         exec_child(command2, shell, env);
         close(fd[PIPE_READ]);
+        exit(0);
     } else {
         close(fd[PIPE_READ]);
         dup2(fd[PIPE_WRITE], 1);
